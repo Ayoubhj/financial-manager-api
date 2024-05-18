@@ -1,9 +1,22 @@
 services:
-  postgres:
-    image: 'postgres:latest'
+  db:
+    container_name: postgres
+    image: postgres:15
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      POSTGRES_USER : finance
+      POSTGRES_PASSWORD : finance2024
+      PGDATA : /data/postgres
+    volumes:
+      - db:/data/postgres
     ports:
-      - '5432'
+      - "5324:5432"
+    networks:
+      - db
+    restart: unless-stopped
+
+networks:
+  db:
+    driver: bridge
+
+volumes:
+  db :

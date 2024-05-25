@@ -6,6 +6,7 @@ import com.financial.managerapi.enums.TokenType;
 import com.financial.managerapi.repositories.TokenRepository;
 import com.financial.managerapi.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,12 +17,12 @@ import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
     private final TokenRepository tokenRepository;
 
     /**
@@ -29,12 +30,8 @@ public class UserService {
      */
     public AuthenticationResponse login(Login request) {
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword())
-        );
-
         var user = userRepository.findByEmail(request.getEmail()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
+        log.info("test {} " , user);
         var jwtToken = jwtService.generateToken(user);
 
         revokeAllUserTokens(user);
@@ -71,7 +68,7 @@ public class UserService {
 
         saveUserToken(savedUser, jwtToken);
 
-        return AuthenticationResponse.builder().user(user).accessToken(jwtToken).build();
+        return AuthenticationResponse.builder().user(savedUser).accessToken(jwtToken).build();
 
     }
 

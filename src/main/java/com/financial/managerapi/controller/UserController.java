@@ -32,4 +32,12 @@ public class UserController {
 
         return ResponseEntity.ok(userService.updatePassword(change,id));
     }
+
+    @GetMapping("/get-connected")
+    public ResponseEntity<User> getConnectedUser()  {
+
+        return ResponseEntity.ok(userService.getConnectedUser());
+    }
+
+
 }

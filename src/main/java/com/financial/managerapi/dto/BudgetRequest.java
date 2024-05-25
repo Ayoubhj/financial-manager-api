@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BudgetRequest {
 
-    private String BudgetName;
-    public String Currency;
+    private String budgetName;
+    private String currency;
 
 }

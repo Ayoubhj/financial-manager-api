@@ -1,6 +1,9 @@
 package com.financial.managerapi.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.financial.managerapi.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,12 +31,15 @@ public class Account extends BaseEntity {
     private AccountType accountType;
     private double balance;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "budget_id")
+    @JsonBackReference
     private Budget budget;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     public User user;
 
 }

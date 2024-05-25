@@ -43,10 +43,11 @@ public class BudgetService implements BudgetInterface, UserInterface {
 
 
     @Override
-    public Budget createBudget(BudgetRequest BudgetRequest) {
+    public Budget createBudget(BudgetRequest budgetRequest) {
 
         var budget = Budget.builder()
-                .BudgetName(BudgetRequest.getBudgetName())
+                .budgetName(budgetRequest.getBudgetName())
+                .currency(budgetRequest.getCurrency())
                 .user(getConnectedUser())
                 .build();
 
@@ -65,8 +66,7 @@ public class BudgetService implements BudgetInterface, UserInterface {
                 -> new NotFoundException("Budget not found"));
 
         budget = Budget.builder()
-                .BudgetName(BudgetRequest.getBudgetName())
-
+                .budgetName(BudgetRequest.getBudgetName())
                 .build();
 
         budgetRepository.save(budget);

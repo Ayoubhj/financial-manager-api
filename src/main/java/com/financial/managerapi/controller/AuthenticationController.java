@@ -30,7 +30,7 @@ public class AuthenticationController {
              @RequestBody @Valid Register request
     ){
         AuthenticationResponse response = userService.register(request);
-        log.info("user is register {}",response.getUser().getUsername());
+        log.info("user is register {}",response.getUser().getFullName());
        return ResponseEntity.ok(response);
     }
 
@@ -43,7 +43,7 @@ public class AuthenticationController {
              @RequestBody @Valid Login request
     ){
         AuthenticationResponse response = userService.login(request);
-        log.info("user is logged in {}",response.getUser().getUsername());
+        log.info("user is logged in {}",response.getUser().getFullName());
         return ResponseEntity.ok(response);
     }
 

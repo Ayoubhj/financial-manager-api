@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users",uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
+@Table(name = "users",uniqueConstraints = { @UniqueConstraint(columnNames = { "email" }) })
 public class User extends BaseEntity implements UserDetails {
 
     @Id
@@ -27,7 +27,6 @@ public class User extends BaseEntity implements UserDetails {
     private Role role;
     private String fullName;
     private String email;
-    private String username;
     @JsonIgnore
     private String password;
     private String phone;
@@ -43,12 +42,12 @@ public class User extends BaseEntity implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return this.username;
+        return email;
     }
 
     @Override

@@ -32,8 +32,20 @@ public class User extends BaseEntity implements UserDetails {
     private String phone;
 
     @Lob
-    @Column(name = "image", columnDefinition="TEXT")
+    @Column(name = "image")
     private String image;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Category> categories;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Budget> budgets;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

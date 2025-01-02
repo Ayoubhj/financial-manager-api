@@ -1,10 +1,7 @@
 package com.financial.managerapi.controller;
 
-import com.financial.managerapi.dto.AccountRequest;
 import com.financial.managerapi.dto.BudgetRequest;
-import com.financial.managerapi.entities.Account;
 import com.financial.managerapi.entities.Budget;
-import com.financial.managerapi.services.AccountService;
 import com.financial.managerapi.services.BudgetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

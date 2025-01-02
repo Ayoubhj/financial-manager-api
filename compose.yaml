@@ -3,16 +3,28 @@ services:
     container_name: postgres
     image: postgres:15
     environment:
-      POSTGRES_USER : finance
-      POSTGRES_PASSWORD : finance2024
+      POSTGRES_USER : ayoub
+      POSTGRES_PASSWORD : password
+      POSTGRES_DB : finance_db
       PGDATA : /data/postgres
     volumes:
       - db:/data/postgres
     ports:
-      - "5324:5432"
+      - "5332:5432"
     networks:
       - db
     restart: unless-stopped
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: 'teste@teste.com'
+      PGADMIN_DEFAULT_PASSWORD: 'teste'
+    ports:
+      - 16543:80
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
+    networks:
+      - db
 
 networks:
   db:

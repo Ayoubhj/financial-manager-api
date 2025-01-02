@@ -1,18 +1,18 @@
 package com.financial.managerapi.entities;
 
-
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import java.util.List;
 
-
 @EqualsAndHashCode(callSuper = true)
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Budget extends BaseEntity {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Category extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +21,10 @@ public class Budget extends BaseEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private Double amount;
-
-    @Column(nullable = false)
-    private java.time.LocalDate startDate;
-
-    @Column(nullable = false)
-    private java.time.LocalDate endDate;
-
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
-
 }

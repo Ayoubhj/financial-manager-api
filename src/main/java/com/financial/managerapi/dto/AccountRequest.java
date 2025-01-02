@@ -1,8 +1,5 @@
 package com.financial.managerapi.dto;
 
-import com.financial.managerapi.entities.Budget;
-import com.financial.managerapi.entities.User;
-import com.financial.managerapi.enums.AccountType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

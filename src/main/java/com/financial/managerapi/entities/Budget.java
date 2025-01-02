@@ -37,4 +37,8 @@ public class Budget extends BaseEntity {
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Transaction> transactions;
 
+    @ManyToOne
+    @JoinColumn(name = "currency_id", nullable = false) // Reference to Currency
+    private Currency currency;
+
 }

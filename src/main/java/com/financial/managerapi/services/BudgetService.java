@@ -41,46 +41,21 @@ public class BudgetService implements BudgetInterface, UserInterface {
         return budgetRepository.findAll(pageable);
     }
 
-
     @Override
-    public Budget createBudget(BudgetRequest budgetRequest) {
-
-        var budget = Budget.builder()
-                .budgetName(budgetRequest.getBudgetName())
-                .currency(budgetRequest.getCurrency())
-                .user(getConnectedUser())
-                .build();
-
-        budgetRepository.save(budget);
-
-        log.info("the Budget created successfully with name {}",budget.getBudgetName());
-
-        return budget;
-
+    public Budget createBudget(BudgetRequest BudgetRequest) {
+        return null;
     }
 
     @Override
     public Budget updateBudget(BudgetRequest BudgetRequest, UUID id) {
-
-        var budget = budgetRepository.findById(id).orElseThrow(()
-                -> new NotFoundException("Budget not found"));
-
-        budget = Budget.builder()
-                .budgetName(BudgetRequest.getBudgetName())
-                .build();
-
-        budgetRepository.save(budget);
-
-        log.info("the Budget created updated with id {}", budget.getBudgetID());
-
-        return budget;
+        return null;
     }
 
     @Override
     public void deleteBudget(UUID id) {
-        budgetRepository.deleteById(id);
-        log.info("the Budget created deleted with id {}", id );
+
     }
+
 
     @Override
     public User getConnectedUser() {

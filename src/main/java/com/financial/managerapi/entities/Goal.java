@@ -3,16 +3,14 @@ package com.financial.managerapi.entities;
 
 import com.financial.managerapi.enums.GoalType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Builder
 public class Goal extends BaseEntity {
 
     @Id
@@ -43,5 +41,8 @@ public class Goal extends BaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "currency_id", nullable = false) // Reference to Currency
+    private Currency currency;
 
 }

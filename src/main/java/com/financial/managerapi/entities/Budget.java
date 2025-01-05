@@ -3,6 +3,8 @@ package com.financial.managerapi.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -25,10 +27,10 @@ public class Budget extends BaseEntity {
     private Double amount;
 
     @Column(nullable = false)
-    private java.time.LocalDate startDate;
+    private LocalDate startDate;
 
     @Column(nullable = false)
-    private java.time.LocalDate endDate;
+    private LocalDate endDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

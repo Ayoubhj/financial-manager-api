@@ -13,9 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
+import java.time.YearMonth;
 import java.util.List;
-import java.util.UUID;
+
 
 @Service
 @AllArgsConstructor
@@ -26,7 +26,7 @@ public class BudgetService implements BudgetInterface, UserInterface {
 
 
     @Override
-    public Budget findBudgetById(UUID BudgetId) {
+    public Budget findBudgetById(Long BudgetId) {
         return budgetRepository.findById(BudgetId).orElseThrow(()
                 -> new NotFoundException("Budget not found"));
     }
@@ -42,20 +42,30 @@ public class BudgetService implements BudgetInterface, UserInterface {
     }
 
     @Override
-    public Budget createBudget(BudgetRequest BudgetRequest) {
+    public Budget createBudget(BudgetRequest budgetRequest) {
+
+        Budget budget = Budget.builder()
+                .name(budgetRequest.getBudgetName())
+                .amount(budgetRequest.getBudgetAmount())
+                .currency(budgetRequest.getCurrency())
+                .user(getConnectedUser())
+                .startDate(YearMonth.now().atDay(1))
+                .endDate(YearMonth.now().atEndOfMonth())
+                .build();
+
+        return budgetRepository.save(budget);
+
+    }
+
+    @Override
+    public Budget updateBudget(BudgetRequest budgetRequest, Long id) {
         return null;
     }
 
     @Override
-    public Budget updateBudget(BudgetRequest BudgetRequest, UUID id) {
-        return null;
-    }
-
-    @Override
-    public void deleteBudget(UUID id) {
+    public void deleteBudget(Long id) {
 
     }
-
 
     @Override
     public User getConnectedUser() {

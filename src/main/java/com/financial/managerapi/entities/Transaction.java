@@ -18,6 +18,9 @@ public class Transaction extends BaseEntity {
     private Long id;
 
     @Column(nullable = false)
+    private String name;
+
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
@@ -45,4 +48,9 @@ public class Transaction extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false) // Reference to Currency
     private Currency currency;
+
+    @ManyToOne
+    @JoinColumn(name = "goal_id", nullable = false) // Link to a Goal
+    private Goal goal;
+
 }

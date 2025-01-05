@@ -5,6 +5,9 @@ import com.financial.managerapi.enums.GoalType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @AllArgsConstructor
@@ -27,14 +30,14 @@ public class Goal extends BaseEntity {
     private Double currentProgress = 0.0;
 
     @Column(nullable = false)
-    private java.time.LocalDate targetDate;
+    private LocalDate targetDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private GoalType type; // ENUM for SAVINGS or SPENDING
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = true) // Optional link
+    @JoinColumn(name = "category_id", nullable = false) // Optional link
     private Category category;
 
     @ManyToOne
@@ -44,5 +47,8 @@ public class Goal extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "currency_id", nullable = false) // Reference to Currency
     private Currency currency;
+
+    @OneToMany(mappedBy = "goal", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transactions;
 
 }
